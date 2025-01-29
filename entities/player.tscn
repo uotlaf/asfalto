@@ -113,4 +113,9 @@ texture = SubResource("AtlasTexture_k60wp")
 
 [node name="ShootMark" type="Marker2D" parent="."]
 position = Vector2(0, -22.925)
-scale = Vector2(1, 1)
+
+[node name="Label" type="Label" parent="."]
+offset_left = -19.0
+offset_top = 24.0
+offset_right = 21.0
+offset_bottom = 47.0
