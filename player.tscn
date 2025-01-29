@@ -36,9 +36,10 @@ animations = [{
 size = Vector2(54, 68)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_odwvq"]
-size = Vector2(62.1176, 62.1176)
+size = Vector2(244.588, 256.235)
 
 [node name="Player" type="Area2D"]
+position = Vector2(314, 128)
 script = ExtResource("1_a2ota")
 metadata/_edit_group_ = true
 
@@ -51,10 +52,18 @@ animation = &"up"
 shape = SubResource("RectangleShape2D_4k3k7")
 
 [node name="Hit Collision" type="CollisionShape2D" parent="."]
-position = Vector2(2.38419e-07, 2.38419e-07)
+position = Vector2(0.5, 0)
 scale = Vector2(0.257576, 0.257576)
 shape = SubResource("RectangleShape2D_odwvq")
 
 [node name="Hit Sprite" type="Sprite2D" parent="."]
 scale = Vector2(0.257576, 0.257576)
 texture = ExtResource("6_50fwf")
+
+[node name="Label" type="Label" parent="."]
+offset_left = -21.0
+offset_top = -57.0
+offset_right = 19.0
+offset_bottom = -34.0
+horizontal_alignment = 1
+vertical_alignment = 1

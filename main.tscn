@@ -6,9 +6,9 @@
 
 [sub_resource type="Curve2D" id="Curve2D_rf5ej"]
 _data = {
-"points": PackedVector2Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 236, 0, 0, 0, 0, 0, 249, 450, 0, 0, 0, 0, -1, 450, 0, 0, 0, 0, 0, 0)
+"points": PackedVector2Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 18.4575, 2.33334, 0, 0, 0, 0, 80, 2, 0, 0, 0, 0, 122, 1, 0, 0, 0, 0, 248, 0, 0, 0, 0, 0, 249, 450, 0, 0, 0, 0, -1, 450, 0, 0, 0, 0, 0, 0)
 }
-point_count = 5
+point_count = 8
 
 [node name="Main" type="Node"]
 script = ExtResource("1_ob4gx")
@@ -27,8 +27,11 @@ one_shot = true
 position = Vector2(250, 450)
 
 [node name="MobPath" type="Path2D" parent="."]
+position = Vector2(1, -3)
 curve = SubResource("Curve2D_rf5ej")
 
 [node name="MobPathLocation" type="PathFollow2D" parent="MobPath"]
+rotation = 0.12575
 
 [node name="Player" parent="." instance=ExtResource("3_tyg73")]
+position = Vector2(104, 72)

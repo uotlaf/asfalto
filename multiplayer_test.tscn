@@ -1,0 +1,24 @@
+[gd_scene load_steps=2 format=3 uid="uid://dis127hvg0i0i"]
+
+[ext_resource type="Script" path="res://multiplayer_test.gd" id="1_elo8n"]
+
+[node name="MultiplayerTest" type="Node2D"]
+script = ExtResource("1_elo8n")
+
+[node name="host" type="Button" parent="."]
+offset_left = 296.0
+offset_top = 223.0
+offset_right = 405.0
+offset_bottom = 272.0
+scale = Vector2(1.16473, 1.13333)
+text = "Host"
+
+[node name="join" type="Button" parent="."]
+offset_left = 477.0
+offset_top = 218.0
+offset_right = 614.0
+offset_bottom = 297.0
+text = "Join"
+
+[connection signal="pressed" from="host" to="." method="become_host"]
+[connection signal="pressed" from="join" to="." method="join"]

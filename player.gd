@@ -7,14 +7,21 @@ signal graze
 @export var walk_speed = 200
 var screen_size # Size of the game window.
 var graze_points = 0
+var is_host: bool = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	name = str(get_multiplayer_authority())
 	screen_size = get_viewport_rect().size
-
+	var label = $Label
+	
+	label.text = "Host" if is_host else "Cliente"
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
+	if not is_multiplayer_authority():
+		return
+	
 	var velocity = Vector2.ZERO # The player's movement vector.
 	if Input.is_action_pressed("move_right"):
 		velocity.x += 1
@@ -35,10 +42,10 @@ func _process(delta: float) -> void:
 		$"Sprite".play()
 	else:
 		$"Sprite".stop()
-		
+	
 	position += velocity * delta
 	position = position.clamp(Vector2.ZERO, screen_size)
-
+	rpc("remote_set_position", global_position) # atualiza sua posição para os outros jogadores
 	if velocity.x != 0:
 		$"Sprite".animation = "walk"
 		$"Sprite".flip_v = false
@@ -47,3 +54,7 @@ func _process(delta: float) -> void:
 	elif velocity.y != 0:
 		$"Sprite".animation = "up"
 		$"Sprite".flip_v = velocity.y > 0
+
+@rpc("unreliable")
+func remote_set_position(authority_position):
+	global_position = authority_position
