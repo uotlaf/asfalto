@@ -1,0 +1,48 @@
+[gd_scene load_steps=2 format=3 uid="uid://dis127hvg0i0i"]
+
+[ext_resource type="Script" path="res://Menu.gd" id="1_44w00"]
+
+[node name="Menu" type="MenuBar"]
+script = ExtResource("1_44w00")
+
+[node name="host" type="Button" parent="."]
+layout_mode = 0
+offset_left = 297.0
+offset_top = 216.0
+offset_right = 431.0
+offset_bottom = 283.0
+scale = Vector2(1.16473, 1.13333)
+toggle_mode = true
+button_pressed = true
+text = "Host"
+
+[node name="join" type="Button" parent="."]
+layout_mode = 0
+offset_left = 490.0
+offset_top = 216.0
+offset_right = 627.0
+offset_bottom = 295.0
+toggle_mode = true
+button_pressed = true
+text = "Join"
+
+[node name="server_ip" type="LineEdit" parent="."]
+layout_mode = 0
+offset_left = 313.0
+offset_top = 169.0
+offset_right = 620.0
+offset_bottom = 200.0
+text = "Server IP:"
+alignment = 1
+
+[node name="player_name" type="LineEdit" parent="."]
+layout_mode = 0
+offset_left = 318.0
+offset_top = 118.0
+offset_right = 619.0
+offset_bottom = 149.0
+text = "Player name:"
+alignment = 1
+
+[connection signal="pressed" from="host" to="." method="become_host"]
+[connection signal="pressed" from="join" to="." method="join"]
