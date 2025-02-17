@@ -15,7 +15,7 @@ func _ready() -> void:
 	screen_size = get_viewport_rect().size
 	var label = $Label
 	
-	label.text = "Host" if is_host else "Cliente"
+	#label.text = "Host" if is_host else "Cliente"
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
@@ -58,3 +58,7 @@ func _process(delta: float) -> void:
 @rpc("unreliable")
 func remote_set_position(authority_position):
 	global_position = authority_position
+
+@rpc
+func display_message(msg):
+	$message.text = msg

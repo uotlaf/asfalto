@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://kxybdg1hixpx"]
+
+[node name="Lobby" type="Node2D"]
+
+[node name="LineEdit" type="LineEdit" parent="."]
+offset_left = 302.0
+offset_top = 590.0
+offset_right = 760.0
+offset_bottom = 621.0
