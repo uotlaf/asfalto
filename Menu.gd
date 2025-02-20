@@ -53,7 +53,7 @@ func join() -> void:
 func add_player_to_the_game(id, name) -> void:
 	peers[id] = name
 	print("Player %d connected!" %id)
-	var player_character = preload("res://player.tscn").instantiate()
+	var player_character = preload("res://entities/player.tscn").instantiate()
 	player_character.set_multiplayer_authority(id)
 	player_character.set_Label(name)
 	
