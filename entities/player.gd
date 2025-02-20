@@ -70,6 +70,9 @@ func _process(delta: float) -> void:
 func remote_set_position(authority_position):
 	global_position = authority_position
 
-@rpc
+@rpc("any_peer", "call_local", "reliable")
 func display_message(msg):
-	$message.text = msg
+	$message.text = msg;
+
+func set_Label(name):
+	$Label.text = name

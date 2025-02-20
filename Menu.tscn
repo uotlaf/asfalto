@@ -44,5 +44,14 @@ offset_bottom = 149.0
 text = "Player name:"
 alignment = 1
 
+[node name="chat" type="LineEdit" parent="."]
+visible = false
+layout_mode = 0
+offset_left = 322.0
+offset_top = 583.0
+offset_right = 687.0
+offset_bottom = 614.0
+
 [connection signal="pressed" from="host" to="." method="become_host"]
 [connection signal="pressed" from="join" to="." method="join"]
+[connection signal="text_submitted" from="chat" to="." method="_on_chat_text_submitted"]
