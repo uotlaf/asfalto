@@ -5,6 +5,7 @@ const SERVER_IP = "localhost"
 const SERVER_ID = 1;
 var peers = {}
 var my_character: Area2D
+var new_scene = preload("res://stage1.tscn").instantiate()
 
 func become_host() -> void:
 	$host.hide()
@@ -30,7 +31,8 @@ func become_host() -> void:
 		func(disconnected_player_id):
 			remove_player_from_the_game.rpc(disconnected_player_id)
 	)
-
+	
+	get_tree().root.add_child(new_scene)
 func join() -> void:
 	$host.hide()
 	$join.hide()
@@ -48,6 +50,7 @@ func join() -> void:
 	var my_id = multiplayer.get_unique_id()
 	var my_name = $player_name.text
 	rpc("add_player_to_the_game", my_id, my_name)
+	get_tree().root.add_child(new_scene)
 	
 @rpc("any_peer", "call_local")
 func add_player_to_the_game(id, name) -> void:
@@ -59,8 +62,7 @@ func add_player_to_the_game(id, name) -> void:
 	
 	if id == multiplayer.get_unique_id(): # É o próprio player que foi adicionado
 		my_character = player_character
-
-	add_child(player_character,true)
+	new_scene.add_child(player_character,true)
 
 @rpc()
 func add_previously_connected_players(remote_peers: Dictionary) -> void:

@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://bv6jvjhflwtpc"]
+
+[ext_resource type="PackedScene" uid="uid://b2edamjc5jk77" path="res://Menu.tscn" id="1_fhp8t"]
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_x23kl"]
+
+[node name="Main" type="Node2D"]
+
+[node name="Menu" parent="." instance=ExtResource("1_fhp8t")]
+
+[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
+spawn_path = NodePath("..")
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_x23kl")

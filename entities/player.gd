@@ -18,6 +18,7 @@ func _ready() -> void:
 	
 	#label.text = "Host" if is_host else "Cliente"
 
+@rpc("any_peer", "call_local", "reliable")
 func shoot():
 	var b = bullet.instantiate()
 	get_tree().root.add_child(b)
@@ -38,7 +39,7 @@ func _process(delta: float) -> void:
 	if Input.is_action_pressed("move_up"):
 		velocity.y -= 1
 	if Input.is_action_pressed("shoot"):
-		shoot()
+		rpc("shoot")
 
 	if velocity.length() > 0:
 		if (Input.is_action_pressed("walk")):
