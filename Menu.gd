@@ -59,6 +59,7 @@ func add_player_to_the_game(id, name) -> void:
 	var player_character = preload("res://entities/player.tscn").instantiate()
 	player_character.set_multiplayer_authority(id)
 	player_character.set_Label(name)
+	player_character.position = Vector2(190, 360)
 	
 	if id == multiplayer.get_unique_id(): # É o próprio player que foi adicionado
 		my_character = player_character

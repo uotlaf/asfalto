@@ -1,11 +1,13 @@
 extends Node
 
 var peer_ids = []
+@export var mob_scene : PackedScene
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	pass # Replace with function body.
-
+	if is_multiplayer_authority():
+		$MobSpawner.start()
+	
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
@@ -34,3 +36,18 @@ func add_previously_connected_players(peers):
 
 func remove_player_from_the_game(id: int):
 	print("Player %s disconnected!" %id)
+
+@rpc("authority")
+func get_new_position():
+	var spawn_location = $MobPath/MobSpawnLocation
+	spawn_location.progress_ratio = randf()
+	rpc("spawn_new_mob", spawn_location.position)
+
+@rpc("any_peer", "call_local", "reliable")
+func spawn_new_mob(position):
+	var new_mob = mob_scene.instantiate()
+	new_mob.position = position
+	add_child(new_mob)
+
+func _on_mob_spawner_timeout() -> void:
+	rpc("get_new_position")

@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://hg8qdfoalxsj"]
+[gd_scene load_steps=6 format=3 uid="uid://hg8qdfoalxsj"]
 
 [ext_resource type="PackedScene" uid="uid://b8jtkn71ac75t" path="res://backgrounds/bg1.tscn" id="1_ajqbg"]
 [ext_resource type="Script" path="res://stage_1.gd" id="1_lwj3j"]
@@ -6,16 +6,32 @@
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_gq2hb"]
 
+[sub_resource type="Curve2D" id="Curve2D_4n4ux"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 42, 2, 0, 0, 0, 0, 47, 68, 0, 0, 0, 0, 39, 122, 0, 0, 0, 0, 39, 175, 0, 0, 0, 0, 196, 158, 0, 0, 0, 0, 277, 8, 0, 0, 0, 0, 309, 162, 0, 0, 0, 0, 98, 132, 0, 0, 0, 0, 339, 28, 0, 0, 0, 0, 356, 79, 0, 0, 0, 0, 203, 96, 0, 0, 0, 0, 183, 49, 0, 0, 0, 0, 113, 41, 0, 0, 0, 0, 92, 77)
+}
+point_count = 14
+
 [node name="Stage1" type="Node"]
 script = ExtResource("1_lwj3j")
+mob_scene = ExtResource("3_4yvsr")
 
 [node name="Bg1" parent="." instance=ExtResource("1_ajqbg")]
 
-[node name="Enemy01" parent="." instance=ExtResource("3_4yvsr")]
-position = Vector2(194, 39)
-
 [node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
+_spawnable_scenes = PackedStringArray("res://entities/enemy1.tscn")
 spawn_path = NodePath("..")
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_gq2hb")
+
+[node name="MobPath" type="Path2D" parent="."]
+curve = SubResource("Curve2D_4n4ux")
+
+[node name="MobSpawnLocation" type="PathFollow2D" parent="MobPath"]
+position = Vector2(42, 2)
+rotation = 1.49518
+
+[node name="MobSpawner" type="Timer" parent="."]
+
+[connection signal="timeout" from="MobSpawner" to="." method="_on_mob_spawner_timeout"]

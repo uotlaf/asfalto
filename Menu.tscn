@@ -1,9 +1,14 @@
-[gd_scene load_steps=2 format=3 uid="uid://b2edamjc5jk77"]
+[gd_scene load_steps=3 format=3 uid="uid://b2edamjc5jk77"]
 
 [ext_resource type="Script" path="res://Menu.gd" id="1_44w00"]
+[ext_resource type="Texture2D" uid="uid://bjjvv8rx73ndt" path="res://backgrounds/menu.png" id="2_os5ur"]
 
 [node name="Menu" type="MenuBar"]
 script = ExtResource("1_44w00")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(193, 226)
+texture = ExtResource("2_os5ur")
 
 [node name="host" type="Button" parent="."]
 layout_mode = 0
