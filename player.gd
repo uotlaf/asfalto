@@ -7,7 +7,7 @@ signal graze
 @export var walk_speed = 200
 var screen_size # Size of the game window.
 var graze_points = 0
-var is_host: bool = false
+#var is_host: bool = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -21,8 +21,8 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	if not is_multiplayer_authority():
 		return
-	
-	var velocity = Vector2.ZERO # The player's movement vector.
+		
+	var velocity = Vector2.ZERO 
 	if Input.is_action_pressed("move_right"):
 		velocity.x += 1
 	if Input.is_action_pressed("move_left"):
@@ -45,11 +45,10 @@ func _process(delta: float) -> void:
 	
 	position += velocity * delta
 	position = position.clamp(Vector2.ZERO, screen_size)
-	rpc("remote_set_position", global_position) # atualiza sua posição para os outros jogadores
+	remote_set_position.rpc(global_position)
 	if velocity.x != 0:
 		$"Sprite".animation = "walk"
 		$"Sprite".flip_v = false
-		# See the note below about the following boolean assignment.
 		$"Sprite".flip_h = velocity.x < 0
 	elif velocity.y != 0:
 		$"Sprite".animation = "up"
@@ -59,6 +58,9 @@ func _process(delta: float) -> void:
 func remote_set_position(authority_position):
 	global_position = authority_position
 
-@rpc
+@rpc("any_peer", "call_local", "reliable")
 func display_message(msg):
-	$message.text = msg
+	$message.text = msg;
+
+func set_Label(name):
+	$Label.text = name
