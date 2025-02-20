@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3 uid="uid://b8jtkn71ac75t"]
+
+[ext_resource type="Texture2D" uid="uid://8mj0gb0dfsl5" path="res://backgrounds/bg1.png" id="1_0pu06"]
+[ext_resource type="Script" path="res://backgrounds/bg_1.gd" id="2_xv32d"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_2qutr"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_0pu06")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="Bg1" type="AnimatedSprite2D"]
+position = Vector2(0, -1808)
+sprite_frames = SubResource("SpriteFrames_2qutr")
+centered = false
+script = ExtResource("2_xv32d")

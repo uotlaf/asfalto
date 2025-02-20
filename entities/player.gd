@@ -1,10 +1,12 @@
 extends Area2D
 
+
 signal hit
 signal graze
 
 @export var run_speed = 400 # How fast the player will move (pixels/sec).
 @export var walk_speed = 200
+@export var bullet : PackedScene
 var screen_size # Size of the game window.
 var graze_points = 0
 
@@ -12,6 +14,10 @@ var graze_points = 0
 func _ready() -> void:
 	screen_size = get_viewport_rect().size
 
+func shoot():
+	var b = bullet.instantiate()
+	get_tree().root.add_child(b)
+	b.transform = global_transform
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
@@ -24,26 +30,26 @@ func _process(delta: float) -> void:
 		velocity.y += 1
 	if Input.is_action_pressed("move_up"):
 		velocity.y -= 1
+	if Input.is_action_pressed("shoot"):
+		shoot()
 
 	if velocity.length() > 0:
 		if (Input.is_action_pressed("walk")):
-			$"Hit Sprite".show()
 			velocity = velocity.normalized() * walk_speed
 		else:
-			$"Hit Sprite".hide()
 			velocity = velocity.normalized() * run_speed
-		$"Sprite".play()
+		
+	if (Input.is_action_pressed("walk")):
+		$"Hit Sprite".show()
 	else:
-		$"Sprite".stop()
+		$"Hit Sprite".hide()
 		
 	position += velocity * delta
 	position = position.clamp(Vector2.ZERO, screen_size)
+	$"Sprite".play()
+	$"Sprite".flip_h = velocity.x > 0
 
 	if velocity.x != 0:
 		$"Sprite".animation = "walk"
-		$"Sprite".flip_v = false
-		# See the note below about the following boolean assignment.
-		$"Sprite".flip_h = velocity.x < 0
-	elif velocity.y != 0:
-		$"Sprite".animation = "up"
-		$"Sprite".flip_v = velocity.y > 0
+	else:
+		$"Sprite".animation = "idle"

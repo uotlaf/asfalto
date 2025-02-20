@@ -1,34 +1,15 @@
-[gd_scene load_steps=5 format=3 uid="uid://hg8qdfoalxsj"]
+[gd_scene load_steps=4 format=3 uid="uid://hg8qdfoalxsj"]
 
-[ext_resource type="Script" path="res://main.gd" id="1_ob4gx"]
-[ext_resource type="PackedScene" uid="uid://caalbnq21pp82" path="res://mob.tscn" id="2_8w2sa"]
-[ext_resource type="PackedScene" uid="uid://up3f65soj4fo" path="res://player.tscn" id="3_tyg73"]
-
-[sub_resource type="Curve2D" id="Curve2D_rf5ej"]
-_data = {
-"points": PackedVector2Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 236, 0, 0, 0, 0, 0, 249, 450, 0, 0, 0, 0, -1, 450, 0, 0, 0, 0, 0, 0)
-}
-point_count = 5
+[ext_resource type="PackedScene" uid="uid://up3f65soj4fo" path="res://entities/player.tscn" id="3_tyg73"]
+[ext_resource type="PackedScene" uid="uid://c5jvt4wt7sn0a" path="res://entities/enemy1.tscn" id="4_axnu4"]
+[ext_resource type="PackedScene" uid="uid://b8jtkn71ac75t" path="res://backgrounds/bg1.tscn" id="4_px178"]
 
 [node name="Main" type="Node"]
-script = ExtResource("1_ob4gx")
-mob_scene = ExtResource("2_8w2sa")
 
-[node name="MobTimer" type="Timer" parent="."]
-wait_time = 0.5
-
-[node name="ScoreTimer" type="Timer" parent="."]
-
-[node name="StartTimer" type="Timer" parent="."]
-wait_time = 2.0
-one_shot = true
-
-[node name="StartPosition" type="Marker2D" parent="."]
-position = Vector2(250, 450)
-
-[node name="MobPath" type="Path2D" parent="."]
-curve = SubResource("Curve2D_rf5ej")
-
-[node name="MobPathLocation" type="PathFollow2D" parent="MobPath"]
+[node name="Bg1" parent="." instance=ExtResource("4_px178")]
 
 [node name="Player" parent="." instance=ExtResource("3_tyg73")]
+position = Vector2(199, 381)
+
+[node name="Enemy01" parent="." instance=ExtResource("4_axnu4")]
+position = Vector2(194, 39)
